@@ -69,7 +69,8 @@ public class ImgApplication {
             web.ignoring()
                     .antMatchers(
                             HttpMethod.POST,
-                            "/api/**"
+                            "/api/**",
+                            "/upload"
                     )
                     .and()
                     .ignoring()
