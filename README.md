@@ -55,7 +55,7 @@
     + code：返回1代表成功，-1代表失败
     + msg：返回接口调用的具体说明
     + img：失败返回null，成功返回图片的图床网址
- 
+![图片上传示例](https://i.loli.net/2020/03/20/L7G3jyzk1cXVKPT.png) 
 ## 搜狗的代理Nginx配置示例
 ```nginx
 upstream image-server {
@@ -80,7 +80,7 @@ proxy_cache_path  /tmp/nginx_proxy_cache levels=1:2 keys_zone=OOXX:32m inactive=
 # max_size=1G 表示这个zone的硬盘容量为 1G
 server{
         listen 80;
-        server_name img.ipav.vip;    
+        server_name 5fu8.com;    
         index index.html;      
         access_log off;        
         location / {
