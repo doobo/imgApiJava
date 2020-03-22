@@ -23,7 +23,7 @@
  + 确认本机已经拥有java的运行环境（JDK>=1.8）,如果没有，请您安装java的运行环境
  + 在jar包的同级目录，在控制台输入启动命令 java -jar img-api-0.0.1-SNAPSHOT.jar
     + 请将img-api-0.0.1-SNAPSHOT.jar替换成您下载的jar包的名字
-    + 如果您需要自定义项目的运行端口，请您在启动的时候使用：java -jar img-api-0.0.1-SNAPSHOT.jar --server.port=8080 (8080可以替换成任意端口)
+    + 自定义登录密码和密钥以及代理域名，请您在启动的时候使用：java -DsmToken=akdsiewlkdka -Dsg.proxies=https://5fu8.com -Dspring.security.user.password=root -jar img-api-0.0.1-SNAPSHOT.jar
  + 打开浏览器，访问 localhost:8080
  + 点击系统设置，进入设置页面，进行系统的首次配置，并修改管理员密码和通讯密钥
  + 默认管理密码为：admin
@@ -39,7 +39,8 @@
  + 根据主页显示的Api接口，调用Api接口，将会返回对应的图片地址
  + 使用主页提供的测试工具，手动选择图片上传，会显示对应的图片地址
 
- > 如果您忘记密码，请您删除war包同级目录下的vone.txt文件，系统将会恢复默认配置 
+ > 如果有新的接口，只需要在vip.ipav.img里面新建一个类，类似Cn6ImgUploadApiRepository.class,这样新的接口立即可以在接口和页面看到，不需要修改以前的代码,欢迎pull
+ > 现有3个接口,新的接口,请用3以后的数字,接口说明可以自定义
  
 ## Api接口说明
  + 请求地址：http://localhost:8080/api  (localhost请自行替换成您的域名)
