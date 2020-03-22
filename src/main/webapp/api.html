@@ -346,6 +346,15 @@
 
         });
     }
+
+    $(document).ready(function(){
+        $.get("/conf/getConfig",function (data) {
+            if (data.code == 1){
+                $("#type").val(data.data.type);
+                $("#key").val(data.data.key);
+            }
+        });
+    });
 </script>
 </body>
 </html>

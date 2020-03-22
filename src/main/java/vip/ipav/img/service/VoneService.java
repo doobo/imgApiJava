@@ -85,7 +85,7 @@ public class VoneService {
             voneConfig.setSinaUser("");
             voneConfig.setSinaPass("");
             voneConfig.setSinaCookie("");
-            voneConfig.setKey("123456");
+            voneConfig.setKey("");
             voneConfig.setType(1);
             voneConfig.setSinaUpdateTime("");
         }

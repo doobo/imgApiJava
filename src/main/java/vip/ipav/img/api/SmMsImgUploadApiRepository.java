@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import vip.ipav.img.dto.ApiRes;
 import vip.ipav.img.dto.FileDTO;
+import vip.ipav.img.entity.VoneConfig;
 import vip.ipav.img.service.VoneService;
 import vip.ipav.img.util.ApiResultUtil;
 import vip.ipav.img.util.VoneUtil;
@@ -143,5 +144,13 @@ public class SmMsImgUploadApiRepository implements ImgUploadApiRepository{
         System.arraycopy(byte1, 0, unitByte, 0, byte1.length);
         System.arraycopy(byte2, 0, unitByte, byte1.length, byte2.length);
         return unitByte;
+    }
+
+    public String getSmToken() {
+        return smToken;
+    }
+
+    public void setSmToken(String smToken) {
+        this.smToken = smToken;
     }
 }

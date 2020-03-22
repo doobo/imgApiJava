@@ -1,12 +1,14 @@
 package vip.ipav.img.controller;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Assert;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vip.ipav.img.api.ImgUploadApiModeFactory;
+import vip.ipav.img.api.SmMsImgUploadApiRepository;
 import vip.ipav.img.dto.ApiRes;
 import vip.ipav.img.dto.CommonRes;
 import vip.ipav.img.dto.FileDTO;
@@ -17,6 +19,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import vip.ipav.img.util.ResultUtil;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +33,12 @@ public class VoneController {
 
     @Autowired
     private VoneService voneService;
+
+    @Value("${token}")
+    private String token;
+
+    @Resource
+    SmMsImgUploadApiRepository smMsImgUploadApiRepository;
 
     /**
      *
@@ -68,8 +77,21 @@ public class VoneController {
         }
     }
 
+    /**
+     * 配置初始
+     * @return
+     */
     @RequestMapping("/conf/getConfig")
     public CommonRes getConfig(){
+        VoneConfig conf = voneService.getVoneConfig();
+        String msToken = conf.getMsToken();
+        if(StringUtils.isBlank(msToken) && StringUtils.isNotBlank(smMsImgUploadApiRepository.getSmToken())){
+            conf.setMsToken(smMsImgUploadApiRepository.getSmToken());
+        }
+        String key = conf.getKey();
+        if(StringUtils.isBlank(key) && StringUtils.isNotBlank(token)){
+            conf.setKey(token);
+        }
         return voneService.getConfig();
     }
 

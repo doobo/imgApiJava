@@ -135,14 +135,14 @@
                         <label class="sr-only" for="PostData">请求参数</label>
                         <div class="input-group">
                             <div class="input-group-addon">请求参数</div>
-                            <input type="text" class="form-control" id="PostData" readonly value="key=后台设置的通讯密钥&onlyUrl=0&imgBase64=图片的Base64编码">
+                            <input type="text" class="form-control" id="PostData" readonly value="key=后台设置的通讯密钥&onlyUrl=0&file=图片文件&type=1">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="PostData">参数说明</label>
                         <div class="input-group">
                             <div class="input-group-addon">参数说明</div>
-                            <input type="text" class="form-control" id="PostDataInfo" readonly value="key=后台设置的通讯密钥,onlyUrl=(传入1为只返回图片网址,其他不返回,否则为返回详细json数据),imgBase64=图片的Base64编码">
+                            <input type="text" class="form-control" id="PostDataInfo" readonly value="key=后台设置的通讯密钥,onlyUrl=(传入1为只返回图片网址,其他不返回,否则为返回详细json数据),file=图片文件,type=接口类型">
                         </div>
                     </div>
 
@@ -328,7 +328,7 @@
         });
     });
     $(document).ready(function(){
-        var url = window.location.href.replace(/api.html/,"api");
+        var url = window.location.href.replace(/file.html/,"upload");
         $("#doApiUrl").val(url);
         $("#ApiUrl").val(url);
         //获取所有接口
@@ -338,6 +338,12 @@
                 str += '<option value="'+key+'">'+res[key]+'</option>'
             }
             $("#type").html(str);
+        });
+        $.get("/conf/getConfig",function (data) {
+            if (data.code == 1){
+                $("#type").val(data.data.type);
+                $("#key").val(data.data.key);
+            }
         });
     });
 </script>

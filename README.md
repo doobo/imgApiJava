@@ -3,7 +3,7 @@
 ===============
 
 
-超简Api图床（Java版） 是基于SpringBoot 2.2.2.RELEASE 实现的一套Api图床程序，主要包含以下特色：
+超简Api图床 是基于SpringBoot 2.2.2.RELEASE 实现的一套Api图床程序，主要包含以下特色：
 
  + 无数据库模式，简单配置，一键搭建
  + 第三方接口接入，不占用服务器空间
@@ -23,7 +23,7 @@
  + 确认本机已经拥有java的运行环境（JDK>=1.8）,如果没有，请您安装java的运行环境
  + 在jar包的同级目录，在控制台输入启动命令 java -jar img-api-0.0.1-SNAPSHOT.jar
     + 请将img-api-0.0.1-SNAPSHOT.jar替换成您下载的jar包的名字
-    + 自定义登录密码和密钥以及代理域名，请您在启动的时候使用：java -DsmToken=akdsiewlkdka -Dsg.proxies=https://5fu8.com -Dspring.security.user.password=root -jar img-api-0.0.1-SNAPSHOT.jar
+    + 自定义登录密码和密钥以及代理域名，请您在启动的时候使用：java -DsmToken=akdsiewlkdka -Dsg.proxies=https://5fu8.com -Dspring.security.user.password=root -Dtoken=12345678 -jar img-api-0.0.1-SNAPSHOT.jar
  + 打开浏览器，访问 localhost:8080
  + 点击系统设置，进入设置页面，进行系统的首次配置，并修改管理员密码和通讯密钥
  + 默认管理密码为：admin
@@ -51,7 +51,7 @@
    + onlyUrl=0 （传入1则调用接口只会返回图片地址，传入其他或者不传会返回完整的json数据）
    
  + 返回数据：
-    {"code":1,"msg":"操作成功","img":"http://img04.sogoucdn.com/app/a/100520146/d8e8b0f277d98fefaf73391f3e502ac7"}
+    {"code":1,"msg":"操作成功","img":"https://i.loli.net/2020/03/20/L7G3jyzk1cXVKPT.png"}
     + code：返回1代表成功，-1代表失败
     + msg：返回接口调用的具体说明
     + img：失败返回null，成功返回图片的图床网址
