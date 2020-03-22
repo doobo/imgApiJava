@@ -21,6 +21,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
         <java.version>1.8</java.version>
+        <maven.test.skip>true</maven.test.skip>
     </properties>
 
     <dependencyManagement>
@@ -85,10 +86,67 @@
             <artifactId>thumbnailator</artifactId>
             <version>0.4.11</version>
         </dependency>
-
     </dependencies>
 
+    <profiles>
+        <!--运行方式-->
+        <!--根目录下执行: mvn clean install-->
+        <!--当前目录下执行: mvn -PProvider -DskipTests clean exec:exec-->
+        <!--打包成Jar包: mvn -PProvider -DskipTests clean package-->
+        <!--Maven运行: mvn -PProvider spring-boot:run-->
+        <profile>
+            <id>Provider</id>
+            <properties>
+                <mainClass>vip.ipav.img.ImgApplication</mainClass>
+                <port>9999</port>
+                <build.profile.id>prod</build.profile.id>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>${mainClass}</argument>
+                                <argument>${port}</argument>
+                                <!--代码main方法，可以通过args[0]等方式获取下面参数-->
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
+        <!--如果前面存在，后面的资源文件不会覆盖，保留前面的-->
+        <resources>
+            <resource>
+                <directory>src/main/webapp</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- 资源根目录排除各环境的配置，使用单独的资源目录来指定 -->
+                <excludes>
+                    <exclude>config-prod/*</exclude>
+                    <exclude>config/*</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <!-- 根据参数指定资源目录 -->
+                <directory>src/main/resources/config-${build.profile.id}</directory>
+                <!-- 指定编译后的目录即生成文件位置（默认为WEB-INF/class） -->
+                <targetPath>config</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/resources/config</directory>
+                <targetPath>config</targetPath>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
