@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>cn.szvone</groupId>
+    <groupId>vip.ipav</groupId>
     <artifactId>img-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>img-api</name>
